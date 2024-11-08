@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Basic Website</title>
+    <style>
+        /* Simple CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            margin: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+        }
+        nav a:hover {
+            color: #0073e6;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .counter-number {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .typing-container {
+            font-size: 1.5em;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .fixed-text {
+            color: #0073e6;
+        }
+        .dynamic-text {
+            border-right: 2px solid #333;
+            display: inline;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to My Website</h1>
+        <p>This is a basic HTML website layout.</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+        <h2>About This Site</h2>
+        <p>This is a simple webpage template using basic HTML and CSS. You can modify the content and style as you like.</p>
+        <h3>Professional Titles</h3>
+        <div class="typing-container">
+            <span class="fixed-text">Cloud </span><span class="dynamic-text"></span>
+        </div>
+        <h3>Getting Started</h3>
+        <p>To start customizing, just replace the content in each section with your own text. You can also add more sections if needed.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+        <div class="counter-number">Views: Loading...</div>
+    </footer>
+
+    <script>
+        const dynamicTextElement = document.querySelector(".dynamic-text");
+        const words = ["Engineer", "Architect"];
+        let currentWordIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentWord = words[currentWordIndex];
+            if (!isDeleting) {
+                dynamicTextElement.textContent = currentWord.slice(0, currentCharIndex + 1);
+                currentCharIndex++;
+                if (currentCharIndex === currentWord.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 1000);  // Pause before deleting
+                    return;
+                }
+            } else {
+                dynamicTextElement.textContent = currentWord.slice(0, currentCharIndex - 1);
+                currentCharIndex--;
+                if (currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentWordIndex = (currentWordIndex + 1) % words.length;  // Move to next word
+                }
+            }
+            setTimeout(typeEffect, isDeleting ? 100 : 200);  // Speed up deleting
+        }
+
+        typeEffect();
+    </script>
+
+    <script src="./index.js"></script>
+
+</body>
+</html>
