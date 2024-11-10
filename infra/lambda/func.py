@@ -1,6 +1,6 @@
 # web-resume-api
 
-'''
+
 import boto3
 import json
 
@@ -22,11 +22,12 @@ def lambda_handler(event, context):
     })
 
     return views
-'''
 
+'''
 # func.py example
 def handler(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello, World!'
     }
+'''
