@@ -1,0 +1,16 @@
+# Ignore Terraform state and lock files
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Ignore .terraform directory
+.terraform/
+
+# Ignore build artifacts
+*.zip
+
+# Other examples you may want to consider
+.DS_Store
+*.log
+.vscode/
+
