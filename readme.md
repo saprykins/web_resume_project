@@ -3,6 +3,18 @@
 ## Overview
 This project aims to deploy a basic HTML website hosted on an S3 bucket, demonstrating interaction with a database via an AWS Lambda function. The site tracks views using a DynamoDB table.
 
+
+## Functional Architecture
+
+```
++-------------------------+        +-------------------------+        +-------------------------+
+|        S3 Bucket        |  <-->  |      Lambda Function    |  <-->  |     DynamoDB Table      |
+|-------------------------|        |-------------------------|        |-------------------------|
+| - Hosts HTML & JS files |        | - Handles API requests  |        | - Stores view counts    |
++-------------------------+        | - Connects to DynamoDB  |        | - Table: web-resume-db  |
+                                   +-------------------------+        +-------------------------+
+```
+
 ## Project Components
 1. **Static Website Hosting**: 
    - The website consists of HTML and JavaScript files hosted on an S3 bucket.
