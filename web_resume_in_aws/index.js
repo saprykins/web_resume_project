@@ -2,8 +2,8 @@ const counter = document.querySelector(".counter-number");
 
 async function updateCounter() {
     try {
-        // let response = await fetch("https://33pd4mlwv5t3ynredjb7ofnhau0wkltu.lambda-url.eu-north-1.on.aws/");
-        let response = await fetch("https://7rfw7c7y7qplhse6pgt64ft5si0uxduq.lambda-url.eu-north-1.on.aws/");
+        let response = await fetch("https://k2hgh73qtrlbmdi7cpupdxdaiq0dehki.lambda-url.eu-north-1.on.aws/"); // tf generated
+        // let response = await fetch("https://rt5balwnxw2qyqqad33riq4ihi0dtydk.lambda-url.eu-north-1.on.aws/"); // manually generated
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }

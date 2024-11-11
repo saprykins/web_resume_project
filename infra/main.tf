@@ -76,11 +76,6 @@ resource "aws_lambda_function_url" "url1" {
   authorization_type = "NONE"
 
   cors {
-    allow_credentials = true
-    allow_origins     = ["https://web-resume-s3.s3.eu-north-1.amazonaws.com"]
-    allow_methods     = ["GET", "POST"]  # Removed "OPTIONS"
-    allow_headers     = ["Content-Type", "x-amz-date", "Authorization", "X-Api-Key", "X-Amz-Security-Token"]
-    expose_headers    = ["Content-Length", "Date", "ETag"]
-    max_age           = 86400
+    allow_origins     = ["*"]
   }
 }
