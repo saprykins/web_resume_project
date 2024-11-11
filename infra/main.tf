@@ -3,10 +3,9 @@ resource "aws_lambda_function" "myfunc" {
   source_code_hash = data.archive_file.zip_the_python_code.output_base64sha256
   function_name    = "myfunc"
   role             = aws_iam_role.iam_for_lambda.arn
-  handler          = "func.handler"
+  handler = "func.lambda_handler"
   runtime          = "python3.8"
 }
-
 
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
@@ -28,13 +27,11 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
-
 resource "aws_iam_policy" "iam_policy_for_resume_project" {
-
   name        = "aws_iam_policy_for_terraform_resume_project_policy"
   path        = "/"
   description = "AWS IAM Policy for managing the resume project role"
-    policy = jsonencode(
+  policy = jsonencode(
     {
       "Version" : "2012-10-17",
       "Statement" : [
@@ -51,12 +48,14 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
           "Effect" : "Allow",
           "Action" : [
             "dynamodb:UpdateItem",
-			      "dynamodb:GetItem"
+            "dynamodb:GetItem",
+            "dynamodb:PutItem"  # Add this line to grant PutItem permission
           ],
-          "Resource" : "arn:aws:dynamodb:*:*:table/resume-challenge"
-        },
+          "Resource" : "arn:aws:dynamodb:*:*:table/web-resume-db-table"
+        }
       ]
-  })
+    }
+  )
 }
 
 
@@ -66,13 +65,11 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
   
 }
 
-
 data "archive_file" "zip_the_python_code" {
   type        = "zip"
   source_file = "${path.module}/lambda/func.py"
   output_path = "${path.module}/lambda/func.zip"
 }
-
 
 resource "aws_lambda_function_url" "url1" {
   function_name      = aws_lambda_function.myfunc.function_name
